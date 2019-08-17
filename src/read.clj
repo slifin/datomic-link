@@ -14,7 +14,16 @@
   (def query (d/pull db [{:inv/color [:db/ident]}
                          {:inv/size [:db/ident]}
                          {:inv/type [:db/ident]}]
-                        [:inv/sku "green"])))
+                        [:inv/sku "SKU-42"]))
+  (def shared-colors (d/q
+                       '[:find ?sku
+                         :where
+                         [?e :inv/sku "SKU-42"]
+                         [?e :inv/color ?color]
+                         [?e2 :inv/color ?color]
+                         [?e2 :inv/sku ?sku]]
+                       db)))
+
 
 
 
