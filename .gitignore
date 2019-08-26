@@ -1,3 +1,4 @@
 .idea/*
 .cpcache/*
 .vscode/*
+.DS_Store
