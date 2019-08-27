@@ -100,14 +100,14 @@ against a connection. Returns connection"
 (defn db-centric-items-by-type
   "Returns db-centric info about items matching type."
   [db type]
-  (d/q '[:find ?sku ?size ?color #_?featured
+  (d/q '[:find ?sku ?size ?color ?featured
          :in $ ?type
          :where
          [?e :inv/type ?type]
          [?e :inv/sku ?sku]
          [?e :inv/size ?size]
          [?e :inv/color ?color]
-         #_[(datomic.ion.starter/feature-item? $ ?e) ?featured]]
+         [(datomic.ion.starter/feature-item? $ ?e) ?featured]]
        db type))
 
 (defn self-describing-items-by-type
