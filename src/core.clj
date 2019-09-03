@@ -7,10 +7,7 @@
                            :client-id
                            :client-name
                            :username
-                           :password})
-
-  (+ 1 1))
-
+                           :password}))
 
 (comment
   "returns"
