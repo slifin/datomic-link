@@ -2,4 +2,4 @@
 .cpcache/*
 .vscode/*
 .DS_Store
-secrets.edn
+src/secrets.edn

@@ -1,13 +1,12 @@
 (ns core
-  (:require [mondo-clj.core :as monzo]))
+  (:require [mondo-clj.core :as monzo]
+            [aero.core :refer [read-config]]))
+
+(defn secrets []
+  (read-config "src/secrets.edn"))
 
 (comment
-  (monzo/get-access-token {
-                           :grant-type ""
-                           :client-id
-                           :client-name
-                           :username
-                           :password}))
+  (monzo/get-access-token (secrets)))
 
 (comment
   "returns"
