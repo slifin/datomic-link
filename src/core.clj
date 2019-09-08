@@ -1,18 +1,17 @@
 (ns core
   (:require [mondo-clj.core :as monzo]
-            [aero.core :refer [read-config]]))
+            [aero.core :refer [read-config]]
+            [datomic.ion :as ion]))
 
-(defn secrets []
-  (read-config "src/secrets.edn"))
+(defn get-params []
+  (memoize
+    #(or ion/get-params {:path "/datomic-shared/prod/auto-saver"}
+       (read-config "src/secrets.edn"))))
+
+(defn get-secrets []
+  (let [{:keys [client-id client-secret] :as secrets} (get-params)]
+    secrets))
 
 (comment
-  (monzo/get-access-token (secrets)))
+  (monzo/get-access-token (get-secrets)))
 
-(comment
-  "returns"
-  {:access-token "access_token",
-   :client-id "client_id",
-   :expires-in 21600,
-   :refresh-token "refresh_token",
-   :token-type "Bearer",
-   :user-id "user_id"})
